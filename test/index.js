@@ -1,3 +1,5 @@
+'use strict'
+
 const assert = require('assert').strict || require('assert')
 const jscomp = require('..')
 const parser = require('../lib/parser')
