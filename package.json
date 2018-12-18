@@ -28,6 +28,9 @@
   },
   "eslintConfig": {
     "extends": "standard",
+    "rules": {
+      "node/no-deprecated-api": false
+    },
     "globals": {
       "describe": false,
       "it": false,
