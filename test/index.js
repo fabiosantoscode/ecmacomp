@@ -6,7 +6,7 @@ const parallelWorker = require('parallel-worker')
 
 describe('jscomp', () => {
   it('reads modules', async () => {
-    const result = await jscomp({ filename: 'test/examples/rollup-jsx/index.js' }, 'test/examples/rollup-jsx/compiled.js')
+    const result = await jscomp({ filename: 'test/examples/rollup-jsx/index.js' })
     const w = parallelWorker.async('()=>{' + result + '}')
 
     assert.equal(await new Promise(resolve => {
@@ -16,7 +16,7 @@ describe('jscomp', () => {
     }), 'null\n')
   })
   it('optimizes code', async () => {
-    const res = await jscomp({ filename: 'test/examples/opt/index.js' }, 'test/examples/opt/compiled.js')
+    const res = await jscomp({ filename: 'test/examples/opt/index.js' })
     assert.equal(res, 'console.log(2);')
   })
   it.skip('compiles Javascript to bytecode', async () => {
