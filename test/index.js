@@ -2,10 +2,25 @@
 
 const assert = require('assert').strict || require('assert')
 const jscomp = require('..')
+const parallelWorker = require('parallel-worker')
 
 describe('jscomp', () => {
-  it('compiles Javascript to bytecode', () => {
-    assert.deepEqual(jscomp(`
+  it('reads modules', async () => {
+    const result = await jscomp({ filename: 'test/examples/rollup-jsx/index.js' }, 'test/examples/rollup-jsx/compiled.js')
+    const w = parallelWorker.async('()=>{' + result + '}')
+
+    assert.equal(await new Promise(resolve => {
+      w.on('stdout', d => {
+        resolve(d)
+      })
+    }), 'null\n')
+  })
+  it('optimizes code', async () => {
+    const res = await jscomp({ filename: 'test/examples/opt/index.js' }, 'test/examples/opt/compiled.js')
+    assert.equal(res, 'console.log(2);')
+  })
+  it.skip('compiles Javascript to bytecode', async () => {
+    assert.deepEqual(await jscomp(`
       function foo() {
         bar(4)
       }
@@ -24,8 +39,8 @@ describe('jscomp', () => {
       ['end']
     ])
   })
-  it.skip('compiles more javascript to bytecode', () => {
-    assert.deepEqual(jscomp(`
+  it.skip('compiles more javascript to bytecode', async () => {
+    assert.deepEqual(await jscomp(`
       if (foo) {
         bar()
       } else {
@@ -95,8 +110,8 @@ describe('jscomp', () => {
       ['var', 'let', 'x']
     ])
   })
-  it.skip('compiles bytecode to Javascript', () => {
-    assert.deepEqual(jscomp.stringify([
+  it.skip('compiles bytecode to Javascript', async () => {
+    assert.deepEqual(await jscomp.stringify([
       ['fn', ['name', 'foo']],
       ['push', 4],
       ['fn', '=>'],

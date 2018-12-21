@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha #istanbul cover ./node_modules/.bin/_mocha",
+    "test": "mocha --timeout 10000 #istanbul cover ./node_modules/.bin/_mocha",
     "lint": "eslint --fix 'lib/**/*.js'"
   },
   "author": "",
@@ -13,7 +13,13 @@
     "acorn": "^6.0.4",
     "acorn-jsx": "^5.0.1",
     "ast-traverse": "^0.1.1",
-    "traverse": "^0.6.6"
+    "parallel-worker": "^1.2.1",
+    "prepack": "^0.2.54",
+    "rollup": "^0.68.1",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-jsx": "^1.0.3",
+    "traverse": "^0.6.6",
+    "with-temp-file": "^1.0.6"
   },
   "devDependencies": {
     "eslint": "^5.10.0",
