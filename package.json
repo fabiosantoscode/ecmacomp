@@ -14,7 +14,14 @@
     "acorn-jsx": "^5.0.1",
     "ast-traverse": "^0.1.1",
     "minimist": "^1.2.0",
-    "traverse": "^0.6.6"
+    "parallel-worker": "^1.2.1",
+    "prepack": "^0.2.54",
+    "rollup": "^0.68.1",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-jsx": "^1.0.3",
+    "terser": "^3.13.1",
+    "traverse": "^0.6.6",
+    "with-temp-file": "^1.0.6"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
@@ -30,6 +37,9 @@
   },
   "eslintConfig": {
     "extends": "standard",
+    "rules": {
+      "node/no-deprecated-api": false
+    },
     "globals": {
       "describe": false,
       "it": false,
