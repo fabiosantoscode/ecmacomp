@@ -1,6 +1,6 @@
-# jscomp [![Build Status](https://travis-ci.org/fabiosantoscode/jscomp.svg?branch=master)](https://travis-ci.org/fabiosantoscode/jscomp)
+# ecmacomp [![Build Status](https://travis-ci.org/fabiosantoscode/ecmacomp.svg?branch=master)](https://travis-ci.org/fabiosantoscode/ecmacomp)
 
-Compile javascript modules, optimize them with prepack, and minify with terser if `NODE_ENV` is `production`. Reduce your code in production today!
+Compile javascript modules, optimize them with prepack and terser if `NODE_ENV` is `production`, and do more optimisations from this project. Reduce your code in production today!
 
 Further optimizations are coming up:
 
@@ -13,12 +13,25 @@ Further optimizations are coming up:
 
 ## Usage (CLI)
 
+You can disable rollup or prepack (to disable terser, use the `NODE_ENV` environment variable `NODE_ENV=production ecmacomp ...`)
 ```bash
-$ jscomp input.js [--norollup] [--noprepack]
+$ ecmacomp input.js [--norollup] [--noprepack] [--public dir] [--output file]
 ```
 
 ## Usage (JS API)
 
 ```javascript
-await require('jscomp')({ filename: 'input.js' })
+await require('ecmacomp')({ filename: 'input.js' })  // Or 'function code....'
 ```
+
+## Hacking `ecmacomp`
+
+To hack on ecmacomp, clone this repository (`git clone https://github.com/fabiosantoscode/ecmacomp`), `cd` to it, run `npm i`, write a test in the appropriate place, respect the lint (`npm run lint`) and start hacking :)
+
+This CLI command reveals the bytecode for a piece of javascript:
+
+```bash
+$ ecmacomp --parse input.js
+```
+
+You can use this bytecode as reference because it's the bytecode used in all the optimisations.
