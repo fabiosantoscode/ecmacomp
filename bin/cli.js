@@ -1,29 +1,23 @@
 var argv = require('minimist')(process.argv.slice(2))
 
-const serve = () => {
-  let files
-  files = argv["_"]
+const serve = (files) => {
   require('../lib/server')(files)
 }
 
 const CLI = () => {
-  let args, arg, files
-  args = []
-  files = []
-  for (arg in argv) { if (arg !== "_") { args.push(arg.toLowerCase()) } }
-
-  if (argv["_"].length() <= 0) {
-    process.stdin.pipe(require('split')()).on('data', file => {
-      files.append(file)
+  let files
+  if (!argv['_'] || argv['_'].length <= 0) {
+    process.stdin.on('data', file => {
+      files.append(toString(file))
     })
-  }
-
-  
-  console.log("Arguments:",args)
-  if (args[0] === 'serve') {
-    serve()
   } else {
-    console.error("Uknown parameter:", args[0])
+    files = argv['_']
+  }
+  if (argv.serve) {
+    serve(files)
+  } else {
+    console.error("Uknown parameter")
+    return
   }
 }
 
