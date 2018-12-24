@@ -1,12 +1,12 @@
 'use strict'
 
 const assert = require('assert').strict || require('assert')
-const jscomp = require('..')
+const ecmacomp = require('..')
 
 describe('stringify', () => {
   it('can read a function call', () => {
     assert.equal(
-      jscomp.stringify([
+      ecmacomp.stringify([
         ['push', ['name', 'i']],
         ['push', 3],
         ['push', ['name', 'fn']],
@@ -17,7 +17,7 @@ describe('stringify', () => {
   })
   it('can use spread', () => {
     assert.equal(
-      jscomp.stringify([
+      ecmacomp.stringify([
         ['push', ['name', 'a'], {spread: 1}],
         ['push', [0]],
         ['push', ['name', 'foo']],
@@ -28,7 +28,7 @@ describe('stringify', () => {
   })
   it('can read a function', () => {
     assert.equal(
-      jscomp.stringify([
+      ecmacomp.stringify([
         ['fn', ['name', 'foo'], ['name', 'a', { spread: 1 }]],
         ['push', 3],
         ['ret'],
@@ -37,7 +37,7 @@ describe('stringify', () => {
       'function foo(...a){return 3}'
     )
     assert.equal(
-      jscomp.stringify([
+      ecmacomp.stringify([
         ['fn', ['name', 'foo'], ['name', 'a', { def: [['push', 4]] }], ['array'], ['name', 'b'], ['name', 'c', { spread: 1 }], ['end'], ['object'], ['name', 'foo', { def: [['push', 'bar']] }], ['end']],
         ['push', 3],
         ['ret'],
@@ -47,7 +47,7 @@ describe('stringify', () => {
     )
   })
   it.skip/*TODO*/('compiles bytecode to Javascript', () => {
-    assert.deepEqual(jscomp.stringify([
+    assert.deepEqual(ecmacomp.stringify([
       ['fn', ['name', 'foo']],
       ['push', ['name', 'i']],
       ['push', ['name', ':decr']],
