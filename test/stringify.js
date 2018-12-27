@@ -65,15 +65,12 @@ describe('stringify', () => {
       ['push', 4],
       ['push', ['name', 'bar']],
       ['call', 3],
-      ['end']
-      /*
-       * TODO
+      ['end'],
       ['push', ['name', 'foo']],
       ['call', 0],
       ['push', 6],
-      ['var', 'const', 'x']
-      */
-    ]), 'function foo(){i--;i-=1;bar(4,()=>{return 3},{"foo":"bar"})}') // foo();const x=6;')
+      ['var', 'const', 'x', true]
+    ]), 'function foo(){i--;i-=1;bar(4,()=>{return 3},{"foo":"bar"})};foo();const x=6')
   })
   it('can beautify the code if asked to')
 })
