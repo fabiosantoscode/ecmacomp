@@ -7,10 +7,10 @@ describe('stringify', () => {
   it('can read a function call', () => {
     assert.equal(
       ecmacomp.stringify([
-        ['push', ['name', 'i']],
-        ['push', 3],
         ['push', ['name', 'fn']],
-        ['call', 2]
+        ['push', 3],
+        ['push', ['name', 'i']],
+        ['call', 3]
       ]),
       'fn(3,i)'
     )
@@ -18,10 +18,10 @@ describe('stringify', () => {
   it('can use spread', () => {
     assert.equal(
       ecmacomp.stringify([
-        ['push', ['name', 'a'], {spread: 1}],
-        ['push', [0]],
         ['push', ['name', 'foo']],
-        ['call', 1]
+        ['push', ['name', 'a'], { spread: 1 }],
+        ['push', [0]],
+        ['call', 3]
       ]),
       'foo([...a])'
     )
@@ -49,25 +49,25 @@ describe('stringify', () => {
   it('compiles bytecode to Javascript', () => {
     assert.deepEqual(ecmacomp.stringify([
       ['fn', 'foo'],
-      ['push', ['name', 'i']],
       ['push', ['name', ':decr']],
-      ['call', 1],
-      ['push', 1],
       ['push', ['name', 'i']],
-      ['push', ['name', ':decrby']],
       ['call', 2],
-      ['push', 'bar'],
-      ['push', { foo: 0 }],
+      ['push', ['name', ':decrby']],
+      ['push', ['name', 'i']],
+      ['push', 1],
+      ['call', 3],
+      ['push', ['name', 'bar']],
+      ['push', 4],
       ['fn', '=>'],
       ['push', 3],
       ['ret'],
       ['end'],
-      ['push', 4],
-      ['push', ['name', 'bar']],
-      ['call', 3],
+      ['push', 'bar'],
+      ['push', { foo: 0 }],
+      ['call', 4],
       ['end'],
       ['push', ['name', 'foo']],
-      ['call', 0],
+      ['call', 1],
       ['push', 6],
       ['var', 'const', 'x', true]
     ]), 'function foo(){i--;i-=1;bar(4,()=>{return 3},{"foo":"bar"})};foo();const x=6')

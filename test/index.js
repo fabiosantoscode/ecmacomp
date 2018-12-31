@@ -17,7 +17,7 @@ describe('ecmacomp', () => {
   })
   it('optimizes code', async () => {
     const res = await ecmacomp({ filename: 'test/examples/opt/index.js' })
-    assert.equal(res, 'console.log(2);')
+    assert.equal(res, 'console.log(2)')
   })
 
 })
