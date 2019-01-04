@@ -5,7 +5,7 @@ const ecmacomp = require('..')
 const parallelWorker = require('parallel-worker')
 
 describe('ecmacomp', () => {
-  it('reads modules', async () => {
+  it('reads modules', async function () {
     const result = await ecmacomp({ filename: 'test/examples/rollup-jsx/index.js' })
     const w = parallelWorker.async('()=>{' + result + '}')
 
@@ -15,9 +15,8 @@ describe('ecmacomp', () => {
       })
     }), 'null\n')
   })
-  it('optimizes code', async () => {
+  it('optimizes code', async function () {
     const res = await ecmacomp({ filename: 'test/examples/opt/index.js' })
     assert.equal(res, 'console.log(2)')
   })
-
 })
