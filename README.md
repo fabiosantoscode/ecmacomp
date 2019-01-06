@@ -21,7 +21,8 @@ $ ecmacomp input.js [--norollup] [--noprepack] [--public dir] [--output file]
 ## Usage (JS API)
 
 ```javascript
-await require('ecmacomp')({ filename: 'input.js' })  // Or 'function code....'
+const code = await require('ecmacomp')({ filename: 'input.js' })
+const code2 = await require('ecmacomp')('function code() {}')
 ```
 
 ## Hacking `ecmacomp`
