@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "lib/index.js",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "bin": {
     "ecmacomp": "bin/cli.js"
   },
